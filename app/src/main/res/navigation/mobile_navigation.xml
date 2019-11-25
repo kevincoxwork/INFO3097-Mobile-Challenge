@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="ca.kevinscode.td_challenge.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/track_purchase"
+        android:name="ca.kevinscode.td_challenge.ui.track.TrackFragment"
+        android:label="@string/track_purchase"
+        tools:layout="@layout/fragment_track" />
+
+    <fragment
+        android:id="@+id/find_in_my_budget"
+        android:name="ca.kevinscode.td_challenge.ui.budget.BudgetFragment"
+        android:label="@string/find_in_my_budget"
+        tools:layout="@layout/fragment_budget" />
+
+    <fragment
+        android:id="@+id/explore"
+        android:name="ca.kevinscode.td_challenge.ui.explore.ExploreFragment"
+        android:label="@string/explore"
+        tools:layout="@layout/fragment_explore" />
+
+    <fragment
+        android:id="@+id/about"
+        android:name="ca.kevinscode.td_challenge.ui.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/about" />
+</navigation>

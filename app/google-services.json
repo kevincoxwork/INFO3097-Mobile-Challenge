@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "820857672389",
+    "firebase_url": "https://fast-spanner-257202.firebaseio.com",
+    "project_id": "fast-spanner-257202",
+    "storage_bucket": "fast-spanner-257202.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820857672389:android:156e71f35c140a2f49d6ac",
+        "android_client_info": {
+          "package_name": "ca.kevinscode.facerecognitiondemo1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820857672389-4lto9njft30ftsnm5u3bspl5hj155n4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs6Y6qFnqflM6BUMjGb19zToNLso291lQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820857672389-4lto9njft30ftsnm5u3bspl5hj155n4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820857672389:android:0a82fbd06644236b49d6ac",
+        "android_client_info": {
+          "package_name": "ca.kevinscode.ocrtextrecognitiondemo1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820857672389-4lto9njft30ftsnm5u3bspl5hj155n4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs6Y6qFnqflM6BUMjGb19zToNLso291lQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820857672389-4lto9njft30ftsnm5u3bspl5hj155n4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820857672389:android:a53ddc86ccd4cfb249d6ac",
+        "android_client_info": {
+          "package_name": "ca.kevinscode.td_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820857672389-4lto9njft30ftsnm5u3bspl5hj155n4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs6Y6qFnqflM6BUMjGb19zToNLso291lQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820857672389-4lto9njft30ftsnm5u3bspl5hj155n4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820857672389:android:098ab737bfb456c249d6ac",
+        "android_client_info": {
+          "package_name": "ca.kevinscode.td_challenge_kevin_cox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820857672389-4lto9njft30ftsnm5u3bspl5hj155n4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs6Y6qFnqflM6BUMjGb19zToNLso291lQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820857672389-4lto9njft30ftsnm5u3bspl5hj155n4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
