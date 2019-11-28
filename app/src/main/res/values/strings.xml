@@ -54,4 +54,6 @@
     <string name="km_from_you">km from you</string>
     <string name="purchase_location_hint">Merchant Name</string>
     <string name="nearby_businesses">Nearby Businesses:</string>
+    <string name="choose_image_location">Choose Image Location</string>
+    <string name="bad_image_path">Bad Image Path</string>
 </resources>

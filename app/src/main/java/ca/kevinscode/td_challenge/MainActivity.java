@@ -6,15 +6,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -40,12 +47,13 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
-import org.w3c.dom.Text;
-
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import ca.kevinscode.td_challenge.ui.budget.BudgetItemFragment;
 import ca.kevinscode.td_challenge.ui.database.DBAdapter;
@@ -135,14 +143,74 @@ public class MainActivity extends AppCompatActivity {
         FragmentStatePagerAdapter adapterViewPager = new MainActivity.MyPagerAdapter(getSupportFragmentManager(), parsedLocations, amount);
         vpPager.setAdapter(adapterViewPager);
     }
+    private static final int PICK_IMAGE = 1;
 
+    AlertDialog chooserDialog;
     public void onTrackPurchaseClicked(View v) {
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-        } else {
-            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(cameraIntent, CAMERA_REQUEST);
-        }
+        LinearLayout alertBoxLayout = new LinearLayout(getApplicationContext());
+        alertBoxLayout.setOrientation(LinearLayout.HORIZONTAL);
+        alertBoxLayout.setGravity(Gravity.CENTER);
+
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.choose_image_location));
+
+
+        final ImageButton buttonCamera = new ImageButton(this);
+        buttonCamera.setImageResource( R.drawable.camera);
+
+        GradientDrawable shape =  new GradientDrawable();
+        shape.setCornerRadius(50);
+        shape.setColor(Color.parseColor("#55b947"));
+        buttonCamera.setBackground(shape);
+        buttonCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                } else {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    chooserDialog.hide();
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                }
+            }
+        });
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 20, 100, 20);
+        buttonCamera.setLayoutParams(params);
+        alertBoxLayout.addView(buttonCamera);
+
+        final ImageButton buttonGallary = new ImageButton(this);
+        buttonGallary.setImageResource( R.drawable.gallary);
+        buttonGallary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_PICK);
+                String[] mimeTypes = {"image/jpeg", "image/png"};
+                intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+                chooserDialog.hide();
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
+            }
+        });
+
+        buttonGallary.setBackground(shape);
+        LinearLayout.LayoutParams paramsGallary = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        paramsGallary.setMargins(100, 20, 0, 20);
+        buttonGallary.setLayoutParams(paramsGallary);
+
+        alertBoxLayout.addView(buttonGallary);
+
+        builder.setView(alertBoxLayout);
+        chooserDialog = builder.create();
+        chooserDialog.show();
     }
 
     @Override
@@ -164,12 +232,20 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            Bitmap photo = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
             getImageAmount(photo);
+        }else if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK){
+            try {
+                InputStream inputStream = this.getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
+                Bitmap photo = BitmapFactory.decodeStream(inputStream);
+                getImageAmount(photo);
+            } catch (FileNotFoundException e) {
+                Toast.makeText(this, getString(R.string.bad_image_path), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
-    private void openOCRDialogVerifcation(double amount){
+    private void openOCRDialogVerification(double amount){
         LinearLayout alertBoxLayout = new LinearLayout(getApplicationContext());
         alertBoxLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -289,7 +365,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         }
                                     }
-                                    openOCRDialogVerifcation(amount);
+                                    openOCRDialogVerification(amount);
                                 }
                             })
                             .addOnFailureListener(
