@@ -1,4 +1,4 @@
-# TD Challenge - Fanshawe College 2019
+# INFO3097 - Fanshawe College 2019
 
 This application was developed as part of the of the TD Challenge where we were encouraged to incorporate the use of ML Kit into a financial application. This project was also the cumulative project from the Fanshawe College course INFO3097.
 
